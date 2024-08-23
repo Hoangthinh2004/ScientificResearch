@@ -5,7 +5,7 @@ class FieldOfStudy(models.Model):
     Name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.Name
+        return self.ID
 
 class University(models.Model):
     ID = models.CharField(max_length=3, primary_key=True)
@@ -35,8 +35,8 @@ class UniMajor(models.Model):
     MajorID = models.ForeignKey(Major, on_delete=models.CASCADE)
     Name = models.CharField(max_length=200)
     Score = models.DecimalField(max_digits=4, decimal_places=2)
-    Tuition_Fee = models.DecimalField(max_digits=12, decimal_places=0)
-    Subject_combination = models.CharField(max_length=3)
+    Tuition_Fee = models.DecimalField(max_digits=12, decimal_places=0, null=True, blank=True)
+    Subject_combination = models.CharField(max_length=3,null=True, blank=True )
 
     def formatted_tuition_fee(self):
         return "{:,.0f}".format(self.Tuition_Fee)
