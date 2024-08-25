@@ -21,7 +21,7 @@
     <body>
         <div class="header">
             <div class="logo">
-                <a href="">
+                <a href="{% url 'home' %}">
                     <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
                 </a>
             </div>
@@ -34,26 +34,32 @@
         <div class="main">
             <div id="navigation">
                 <div id="nav-bar">
-                    <div class="nav-home"><a href="#">Trang chủ</a></div>
+                    <div class="nav-home"><a href="{% url 'home' %}">Trang chủ</a></div>
                     <div class="wrapper">
                         <div class="select-btn">
-                            <span>Trường đại học</span>
+                            <a href="{% url 'list-university' %}">
+                                <span>Trường đại học</span>
+                            </a>
                             <i class="uil uil-angle-down"></i>
                         </div>
-                        <div class="content">
-                            <div class="search">
+                        <div class="content" me>
+                            <form class="search" method="GET" action="{% url 'list-university' %}">
                                 <i class="uil uil-search"></i>
-                                <input type="text" placeholder="Search">
-                            </div>
+                                <input type="text" name="u" placeholder="Search" list="university-list">
+                            </form>
                             <ul class="options">
-                                <li><a href="home1.html">UEH</a></li>
-                                <li><a href="home1.html">FPT</a></li>
-                                <li><a href="home1.html">Hutech</a></li>
-                                <li><a href="home1.html">USSH</a></li>
-                                <li><a href="home1.html">UIT</a></li>
-                                <li><a href="home1.html">UTE</a></li>
-                                <li><a href="home1.html">UTC2</a></li>
-                                <li><a href="home1.html">UTH</a></li>
+                                
+                                {% for uni in unis %}
+                                    <li><a href="{% url 'show-one-university' uni.ID %}">{{uni.ID}}-{{uni.Name}}</a></li>
+                                    <!-- <li><a href="home1.html">FPT</a></li>
+                                    <li><a href="home1.html">Hutech</a></li>
+                                    <li><a href="home1.html">USSH</a></li>
+                                    <li><a href="home1.html">UIT</a></li>
+                                    <li><a href="home1.html">UTE</a></li>
+                                    <li><a href="home1.html">UTC2</a></li>
+                                    <li><a href="home1.html">UTH</a></li> -->
+                                {% endfor %}
+                                    
                             </ul>
                         </div>
                     </div>
@@ -65,25 +71,29 @@
                         <div class="content-1">
                             <div class="search-1">
                                 <i class="uil uil-search"></i>
-                                <input id="input-1" type="text" placeholder="Search">
+                                <input id="input-1" name="m" type="text" placeholder="Search" list="field-of-study-list">
                             </div>
                             <ul class="options-1">
-                                <li><a href="huhu.html">Công nghệ thông tin</a></li>
-                                <li><a href="">Kinh tế - Tài chính</a></li>
-                                <li><a href="">Công an - Quân đội</a></li>
-                                <li><a href="">Ngoại giao - Ngoại ngữ</a></li>
-                                <li><a href="">Sư phạm - Giáo dục</a></li>
-                                <li><a href="">Kế toán - Kiểm toán</a></li>
-                                <li><a href="">Y - Dược</a></li>
-                                <li><a href="">Xây dựng - Kiến trúc - Giao thông</a></li>
+                                
+                                {% for major in majors %}
+                                    <li><a href="{% url 'show-one-major' major.id %}">{{major.ID}}-{{major.Name}}</a></li>
+                                    <!-- <li><a href="">Kinh tế - Tài chính</a></li>
+                                    <li><a href="">Công an - Quân đội</a></li>
+                                    <li><a href="">Ngoại giao - Ngoại ngữ</a></li>
+                                    <li><a href="">Sư phạm - Giáo dục</a></li>
+                                    <li><a href="">Kế toán - Kiểm toán</a></li>
+                                    <li><a href="">Y - Dược</a></li>
+                                    <li><a href="">Xây dựng - Kiến trúc - Giao thông</a></li> -->
+                                {% endfor %}
+                                    
                             </ul>
                         </div>
                     </div>
                 </div>
         
                 <div class="search-bar">
-                    <form action="/search" method="GET">
-                        <input type="text" name="query" placeholder="Tìm kiếm trường đại học và ngành học">
+                    <form action="{% url 'home' %}" method="GET">
+                        <input type="text" name="s" placeholder="Tìm kiếm trường đại học và ngành học">
                         <button id="btn-search" type="submit"><i class="uil uil-search"></i></button>
                     </form>
                 </div>
@@ -101,22 +111,27 @@
                 <div class="content-sidebar">
                     <div class="select-sidebar">
                         <i class="uil uil-angle-right"></i>
-                        <span>Công nghệ thông tin</span>
+                        
+                        {% for fieldOfMajor in fieldOfMajors %}
+                            <span>{{fieldOfMajor.value}}</span>
+                        {% endfor %}
+                            
                     </div>
                     <div class="list-content">
                         <ul class="options-sb">
-                            <li><input type="checkbox">Công nghệ thông tin</input></li>
-                            <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
-                            <li><input type="checkbox">Hệ thống thông tin</input></li>
-                            <li><input type="checkbox">An toàn thông tin</input></li>
-                            <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
-                            <li><input type="checkbox">Khoa học máy tính</input></li>
-                            <li><input type="checkbox">Khoa học dữ liệu</input></li>
-                            <li><input type="checkbox">Điện toán đám mây</input></li>
+                            
+                            {% for major in majors %}
+                                
+                                {% if major.id == fieldOfMajor.key %}
+                                    
+                                {% endif %}
+                                    
+                            {% endfor %}
+                                
                         </ul>
                     </div>
                 </div>
-                <div class="content-sidebar">
+                <!-- <div class="content-sidebar">
                     <div class="select-sidebar">
                         <i class="uil uil-angle-right"></i>
                         <span>Kinh tế - Tài chính</span>
@@ -151,7 +166,7 @@
                             <li><input type="checkbox">Điện toán đám mây</input></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         {% block main-content %} {% endblock main-content %}
