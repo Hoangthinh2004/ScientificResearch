@@ -1,0 +1,35 @@
+{% extends 'Demo/base.html' %}
+{% load static %}
+{% block main-content %}
+<!--Thông tin tổng quan của khối ngành-->
+<div class="fieldofmajor-details">
+    <div class="header">
+        <img src="" alt=""> <!--Icon major-->
+        <span>Công nghệ thông tin</span>
+    </div>
+    <div class="description">
+        <p>Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm</p>
+    </div>
+</div>
+<!--List majoruni của khối ngành-->
+<div class="list-major">
+    <div class="major-item">
+        <p>Kỹ thuật phần mềm</p>
+        <p>Đại học FPT</p>
+        <p>22</p>
+        <p>~90 triệu/năm</p>
+    </div>
+    <div class="major-item">
+        <p>Công nghệ thông tin</p>
+        <p>Đại học Hutech</p>
+        <p>21</p>
+        <p>~70 triệu/năm</p>
+    </div>
+    <div class="major-item">
+        <p>Khoa học máy tính</p>
+        <p>Đại học Bách Khoa</p>
+        <p>28</p>
+        <p>~80 triệu/năm</p>
+    </div>
+</div>
+{% endblock main-content %}
