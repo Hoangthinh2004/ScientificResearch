@@ -28,7 +28,7 @@ class Major(models.Model):
     Name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.Name
+        return self.ID
 
 class UniMajor(models.Model):
     UniID = models.ForeignKey(University, on_delete=models.CASCADE)
