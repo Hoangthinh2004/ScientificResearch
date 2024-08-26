@@ -49,7 +49,7 @@
                             </form>
                             <ul class="options">
                                 
-                                {% for uni_global in uni_globals %}
+                                {% for uni_global in unis_globals %}
                                     <li><a href="{% url 'show-one-university' uni_global.ID %}">{{uni_global.ID}}-{{uni_global.Name}}</a></li>
                                     <!-- <li><a href="home1.html">FPT</a></li>
                                     <li><a href="home1.html">Hutech</a></li>
@@ -65,7 +65,9 @@
                     </div>
                     <div class="nav-1">
                         <div class="select-btn-1">
-                            <span>Nhóm ngành</span>
+                            <a href="{% url 'list-major' %}">
+                                <span>Nhóm ngành</span>
+                            </a>
                             <i class="uil uil-angle-down"></i>
                         </div>
                         <div class="content-1">
@@ -75,7 +77,7 @@
                             </div>
                             <ul class="options-1">
                                 
-                                {% for major_global in major_globals %}
+                                {% for major_global in majors_globals %}
                                     <li><a href="{% url 'show-one-major' major_global.ID %}">{{major_global.ID}}-{{major_global.Name}}</a></li>
                                     <!-- <li><a href="">Kinh tế - Tài chính</a></li>
                                     <li><a href="">Công an - Quân đội</a></li>
@@ -111,7 +113,7 @@
                 <div class="content-sidebar">
                     <div class="select-sidebar">
                         
-                        {% for field_global in field_globals %}
+                        {% for field_global in fields_globals %}
                             <i class="uil uil-angle-right"></i>
                             <span>{{field_global.Name}}</span>
                         {% endfor %}
@@ -120,10 +122,10 @@
                     <div class="list-content">
                         <ul class="options-sb">
                             
-                            {% for major_global in major_globals %}
+                            {% for major_global in majors_globals %}
                                 
                                 {% if major_global.id == field_global.ID %}
-                                    
+                                <li><input type="checkbox">{{major_global.Name}}</input></li>
                                 {% endif %}
                                     
                             {% endfor %}
