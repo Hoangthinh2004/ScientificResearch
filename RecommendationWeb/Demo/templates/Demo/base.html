@@ -49,8 +49,8 @@
                             </form>
                             <ul class="options">
                                 
-                                {% for uni in unis %}
-                                    <li><a href="{% url 'show-one-university' uni.ID %}">{{uni.ID}}-{{uni.Name}}</a></li>
+                                {% for uni_global in uni_globals %}
+                                    <li><a href="{% url 'show-one-university' uni_global.ID %}">{{uni_global.ID}}-{{uni_global.Name}}</a></li>
                                     <!-- <li><a href="home1.html">FPT</a></li>
                                     <li><a href="home1.html">Hutech</a></li>
                                     <li><a href="home1.html">USSH</a></li>
@@ -75,8 +75,8 @@
                             </div>
                             <ul class="options-1">
                                 
-                                {% for major in majors %}
-                                    <li><a href="{% url 'show-one-major' major.ID %}">{{major.ID}}-{{major.Name}}</a></li>
+                                {% for major_global in major_globals %}
+                                    <li><a href="{% url 'show-one-major' major_global.ID %}">{{major_global.ID}}-{{major_global.Name}}</a></li>
                                     <!-- <li><a href="">Kinh tế - Tài chính</a></li>
                                     <li><a href="">Công an - Quân đội</a></li>
                                     <li><a href="">Ngoại giao - Ngoại ngữ</a></li>
@@ -100,37 +100,37 @@
             </div>
 
             <!--side-bar-->
-        
-            <div class="side-bar">
-                <h2>Nhóm Ngành</h2>
-                <hr>
-                <div class="search-sidebar">
-                    <input id="input-sb" type="text" placeholder="Tìm kiếm nhóm ngành">
-                    <i class="uil uil-search"></i>
-                </div>
-                <div class="scroll-sb">
-                    <div class="content-sidebar">
-                        <div class="select-sidebar">        
-                            {% for fieldOfMajor in fieldOfMajors %}
-                                <i class="uil uil-angle-right"></i>
-                                <span>{{fieldOfMajor.value}}</span>
-                            {% endfor %}
-                                
-                        </div>
-                        <div class="list-content">
-                            <ul class="options-sb">
-                                
-                                {% for major in majors %}
-                                    
-                                    {% if major.id == fieldOfMajor.key %}
-                                        
-                                    {% endif %}
-                                        
-                                {% endfor %}
-                                    
-                            </ul>
-                        </div>
+        <div class="side-bar">
+            <h2>Nhóm Ngành</h2>
+            <hr>
+            <div class="search-sidebar">
+                <input id="input-sb" type="text" placeholder="Tìm kiếm nhóm ngành">
+                <i class="uil uil-search"></i>
+            </div>
+            <div class="scroll-sb">
+                <div class="content-sidebar">
+                    <div class="select-sidebar">
+                        
+                        {% for field_global in field_globals %}
+                            <i class="uil uil-angle-right"></i>
+                            <span>{{field_global.Name}}</span>
+                        {% endfor %}
+                            
                     </div>
+                    <div class="list-content">
+                        <ul class="options-sb">
+                            
+                            {% for major_global in major_globals %}
+                                
+                                {% if major_global.id == field_global.ID %}
+                                    
+                                {% endif %}
+                                    
+                            {% endfor %}
+  
+                        </ul>
+                    </div>
+                </div>
                     <!-- <div class="content-sidebar">
                         <div class="select-sidebar">
                             <i class="uil uil-angle-right"></i>
@@ -167,7 +167,6 @@
                             </ul>
                         </div>
                     </div> -->
-                </div>
             </div>
             <div class="main-content">
                 <hr>

@@ -7,9 +7,7 @@ from django.db.models import Q
 def home(request):
     unis = University.objects.all()
     majors = Major.objects.all()
-    fieldOfMajors = {}
-    for major in majors:
-        fieldOfMajors |= {major.FieldID: major.FieldID.Name}
+    fieldOfMajors = FieldOfStudy.objects.all()
     if request.method == 'GET' and request.GET.get('s') != None:
         s = request.GET.get('s') 
         unis = University.objects.filter(Q(ID__icontains=s) |
@@ -58,3 +56,7 @@ def showOneMajor(request, pk):
     major = get_list_or_404(UniMajor, Q(MajorID_FieldID=pk) | Q(MajorID=pk))
     context = {'majors': major}
     return render(request,'Demo/major.html' , context)
+
+def filterRegion(request):
+    context = {}
+    return render(request, '', context)
