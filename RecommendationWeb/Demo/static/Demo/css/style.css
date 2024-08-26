@@ -146,7 +146,7 @@
 /*Của 2 droplist*/
 #nav-bar .content, .nav-1 .content-1 {
     position: absolute;
-    z-index: 3; /* Even higher z-index to guarantee it's on top */
+    z-index: 2; /* Even higher z-index to guarantee it's on top */
 }
 /* droplist 2 */
 .nav-1 {
@@ -176,6 +176,11 @@
     padding-left: 6px;
     font-size: 31px;
     transition: transform 0.3s linear ;
+}
+
+.select-btn-1 a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .nav-1.active .select-btn-1 i
@@ -350,7 +355,7 @@
 .side-bar {
     position: absolute;
     height: 550px;
-    width: 300px;
+    width: 298px;
     padding: 20px;
     background-color: #fff;
     border-right: 1px solid #ccc;
@@ -381,15 +386,31 @@
     transform: translateY(-50%);
     font-size: 15px;
     color: #6c6c6c;
-    
 }
 
 .select-sidebar, .options-sb li {
     cursor: pointer;
 }
 
+.select-sidebar {
+    display: flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.select-sidebar:hover {
+    background-color: #f1f1f1;
+}
+
+.select-sidebar span {
+    flex-grow: 1;
+    padding-left: 8px;
+    display: inline-block;
+}
+
 .select-sidebar i{
-    position: absolute;
     transition: transform 0.3s linear;
 }
 
@@ -397,8 +418,8 @@
     transform: rotate(90deg);
 }
 
-.select-sidebar span {
-    padding-left: 20px;
+.content-sidebar {
+    padding-right: 5px;
 }
 
 .list-content {
@@ -463,18 +484,18 @@
 /* section */
 /* .section {
     display: flex;
-    justify-content: space-between;
+    
 } */
 
 /*main-content*/
 .main-content {
-    background-color: #4c4343;
-    width: 74.5%;
-    /* float: right; */
+    display: inline-block;
+    background-color: #fff;
+    width: 78.5%;
     margin-right: 10px;
     margin-top: 10px;
     border-radius: 5px;
-    margin-left: 50px;
+    margin-left: 316px;
 }
 
 /* Định dạng thanh tùy chọn */

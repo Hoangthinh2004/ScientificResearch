@@ -101,77 +101,44 @@
                 </div>
             </div>
 
+            <div class = "section"> 
             <!--side-bar-->
-        <div class="side-bar">
-            <h2>Nhóm Ngành</h2>
-            <hr>
-            <div class="search-sidebar">
-                <input id="input-sb" type="text" placeholder="Tìm kiếm nhóm ngành">
-                <i class="uil uil-search"></i>
-            </div>
-            <div class="scroll-sb">
-                <div class="content-sidebar">
-                    <div class="select-sidebar">
-                        
+            <div class="side-bar">
+                <h2>Nhóm Ngành</h2>
+                <hr>
+                <div class="search-sidebar">
+                    <input id="input-sb" type="text" placeholder="Tìm kiếm nhóm ngành">
+                    <i class="uil uil-search"></i>
+                </div>
+                <div class="scroll-sb">
+                    <div class="content-sidebar">
                         {% for field_global in fields_globals %}
+                        <div class="select-sidebar">
                             <i class="uil uil-angle-right"></i>
-                            <span>{{field_global.Name}}</span>
-                            <br>
+                            <span>{{ field_global.Name }}</span>
+                        </div>
+                        <div class="list-content">
+                            <ul class="options-sb">
+                                {% for major_global in majors_globals %}
+                                    {% if major_global.FieldID.ID == field_global.ID %}
+                                    <li>
+                                        <input type="checkbox" name="majorFilter">{{ major_global.Name }}</input>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
                         {% endfor %}
-                            
-                    </div>
-                    <div class="list-content">
-                        <ul class="options-sb">
-                            
-                            {% for major_global in majors_globals %}
-                                
-                                {% if major_global.id == field_global.ID %}
-                                <li><input type="checkbox">{{major_global.Name}}</input></li>
-                                {% endif %}
-                                    
-                            {% endfor %}
-  
-                        </ul>
                     </div>
                 </div>
-                    <!-- <div class="content-sidebar">
-                        <div class="select-sidebar">
-                            <i class="uil uil-angle-right"></i>
-                            <span>Kinh tế - Tài chính</span>
-                        </div>
-                        <div class="list-content">
-                            <ul class="options-sb">
-                                <li><input type="checkbox">Công nghệ thông tin</input></li>
-                                <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
-                                <li><input type="checkbox">Hệ thống thông tin</input></li>
-                                <li><input type="checkbox">An toàn thông tin</input></li>
-                                <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
-                                <li><input type="checkbox">Khoa học máy tính</input></li>
-                                <li><input type="checkbox">Khoa học dữ liệu</input></li>
-                                <li><input type="checkbox">Điện toán đám mây</input></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="content-sidebar">
-                        <div class="select-sidebar">
-                            <i class="uil uil-angle-right"></i>
-                            <span>Y - Dược</span>
-                        </div>
-                        <div class="list-content">
-                            <ul class="options-sb">
-                                <li><input type="checkbox">Công nghệ thông tin</input></li>
-                                <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
-                                <li><input type="checkbox">Hệ thống thông tin</input></li>
-                                <li><input type="checkbox">An toàn thông tin</input></li>
-                                <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
-                                <li><input type="checkbox">Khoa học máy tính</input></li>
-                                <li><input type="checkbox">Khoa học dữ liệu</input></li>
-                                <li><input type="checkbox">Điện toán đám mây</input></li>
-                            </ul>
-                        </div>
-                    </div> -->
             </div>
+            <!-- End Side Bar -->                   
+            
             <div class="main-content">
+                <div> <!--Phần này thay đổi theo trường hoặc khối ngành, còn ở home sẽ không xuất hiện-->
+                    <h3>Title</h3>
+                    <p>description</p>
+                </div>
                 <hr>
                 <div class="option-bar">
                     <form action="" method="get">
@@ -205,9 +172,11 @@
                     
                 </div>
                 <hr>
+                {% block main-content %} {% endblock main-content %}
             </div>
+        </div>
+        </div>
         
-        {% block main-content %} {% endblock main-content %}
         <!--footer-->
         <footer>
             <div id="footer">

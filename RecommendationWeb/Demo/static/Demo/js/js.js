@@ -90,31 +90,40 @@ document.querySelectorAll('.options-sb li').forEach(function(item) {
 //droplist cho side bar
 
 // Lấy tất cả các droplist trong sidebar
-const sidebars = document.querySelectorAll(".content-sidebar");
+document.addEventListener('DOMContentLoaded', () => {
+    const selects = document.querySelectorAll('.select-sidebar');
 
-sidebars.forEach(sidebar => {
-    const select = sidebar.querySelector(".select-sidebar");
-
-    select.addEventListener("click", () => {
-        // Mở hoặc đóng droplist hiện tại mà không ảnh hưởng đến các droplist khác
-        sidebar.classList.toggle("active");
+    selects.forEach(select => {
+        select.addEventListener('click', () => {
+            const contentSidebar = select.parentElement;
+            
+            // Close other active droplists
+            document.querySelectorAll('.content-sidebar.active').forEach(activeSidebar => {
+                if (activeSidebar !== contentSidebar) {
+                    activeSidebar.classList.remove('active');
+                }
+            });
+            
+            // Toggle 'active' class for current droplist
+            contentSidebar.classList.toggle('active');
+        });
     });
 });
 
-//search side bar
-const searchInput = document.getElementById('input-sb');
-const optionsList = document.querySelectorAll('.content-sidebar');
+// Lấy phần tử input và tất cả các phần tử nhóm ngành
+const input = document.getElementById('input-sb');
+const allFields = document.querySelectorAll('.select-sidebar');
 
-        searchInput.addEventListener('input', function () {
-            const filter = searchInput.value.toLowerCase();
+// Thêm sự kiện khi người dùng nhập vào ô tìm kiếm
+input.addEventListener('input', function() {
+    const filter = input.value.toLowerCase(); // Chuyển tất cả chữ cái sang chữ thường
 
-            optionsList.forEach(option => {
-                const text = option.querySelector('.select-sidebar span').textContent.toLowerCase();
-
-                if (text.includes(filter)) {
-                    option.style.display = '';
-                } else {
-                    option.style.display = 'none';
-                }
-            });
-        });
+    allFields.forEach(field => {
+        const text = field.innerText.toLowerCase();
+        if (text.includes(filter)) {
+            field.parentElement.style.display = ''; // Hiển thị nhóm ngành phù hợp
+        } else {
+            field.parentElement.style.display = 'none'; // Ẩn nhóm ngành không phù hợp
+        }
+    });
+});
