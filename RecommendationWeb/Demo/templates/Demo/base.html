@@ -100,78 +100,119 @@
             </div>
 
             <!--side-bar-->
-        <div class="side-bar">
-            <h2>Nhóm Ngành</h2>
-            <hr>
-            <div class="search-sidebar">
-                <input id="input-sb" type="text" placeholder="Tìm kiếm nhóm ngành">
-                <i class="uil uil-search"></i>
-            </div>
-            <div class="scroll-sb">
-                <div class="content-sidebar">
-                    <div class="select-sidebar">
-                        <i class="uil uil-angle-right"></i>
-                        
-                        {% for fieldOfMajor in fieldOfMajors %}
-                            <span>{{fieldOfMajor.value}}</span>
-                        {% endfor %}
-                            
-                    </div>
-                    <div class="list-content">
-                        <ul class="options-sb">
-                            
-                            {% for major in majors %}
-                                
-                                {% if major.id == fieldOfMajor.key %}
-                                    
-                                {% endif %}
-                                    
+        
+            <div class="side-bar">
+                <h2>Nhóm Ngành</h2>
+                <hr>
+                <div class="search-sidebar">
+                    <input id="input-sb" type="text" placeholder="Tìm kiếm nhóm ngành">
+                    <i class="uil uil-search"></i>
+                </div>
+                <div class="scroll-sb">
+                    <div class="content-sidebar">
+                        <div class="select-sidebar">        
+                            {% for fieldOfMajor in fieldOfMajors %}
+                                <i class="uil uil-angle-right"></i>
+                                <span>{{fieldOfMajor.value}}</span>
                             {% endfor %}
                                 
-                        </ul>
+                        </div>
+                        <div class="list-content">
+                            <ul class="options-sb">
+                                
+                                {% for major in majors %}
+                                    
+                                    {% if major.id == fieldOfMajor.key %}
+                                        
+                                    {% endif %}
+                                        
+                                {% endfor %}
+                                    
+                            </ul>
+                        </div>
                     </div>
+                    <!-- <div class="content-sidebar">
+                        <div class="select-sidebar">
+                            <i class="uil uil-angle-right"></i>
+                            <span>Kinh tế - Tài chính</span>
+                        </div>
+                        <div class="list-content">
+                            <ul class="options-sb">
+                                <li><input type="checkbox">Công nghệ thông tin</input></li>
+                                <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
+                                <li><input type="checkbox">Hệ thống thông tin</input></li>
+                                <li><input type="checkbox">An toàn thông tin</input></li>
+                                <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
+                                <li><input type="checkbox">Khoa học máy tính</input></li>
+                                <li><input type="checkbox">Khoa học dữ liệu</input></li>
+                                <li><input type="checkbox">Điện toán đám mây</input></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content-sidebar">
+                        <div class="select-sidebar">
+                            <i class="uil uil-angle-right"></i>
+                            <span>Y - Dược</span>
+                        </div>
+                        <div class="list-content">
+                            <ul class="options-sb">
+                                <li><input type="checkbox">Công nghệ thông tin</input></li>
+                                <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
+                                <li><input type="checkbox">Hệ thống thông tin</input></li>
+                                <li><input type="checkbox">An toàn thông tin</input></li>
+                                <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
+                                <li><input type="checkbox">Khoa học máy tính</input></li>
+                                <li><input type="checkbox">Khoa học dữ liệu</input></li>
+                                <li><input type="checkbox">Điện toán đám mây</input></li>
+                            </ul>
+                        </div>
+                    </div> -->
                 </div>
-                <!-- <div class="content-sidebar">
-                    <div class="select-sidebar">
-                        <i class="uil uil-angle-right"></i>
-                        <span>Kinh tế - Tài chính</span>
-                    </div>
-                    <div class="list-content">
-                        <ul class="options-sb">
-                            <li><input type="checkbox">Công nghệ thông tin</input></li>
-                            <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
-                            <li><input type="checkbox">Hệ thống thông tin</input></li>
-                            <li><input type="checkbox">An toàn thông tin</input></li>
-                            <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
-                            <li><input type="checkbox">Khoa học máy tính</input></li>
-                            <li><input type="checkbox">Khoa học dữ liệu</input></li>
-                            <li><input type="checkbox">Điện toán đám mây</input></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content-sidebar">
-                    <div class="select-sidebar">
-                        <i class="uil uil-angle-right"></i>
-                        <span>Y - Dược</span>
-                    </div>
-                    <div class="list-content">
-                        <ul class="options-sb">
-                            <li><input type="checkbox">Công nghệ thông tin</input></li>
-                            <li><input type="checkbox">Kỹ thuật phần mềm</input></li>
-                            <li><input type="checkbox">Hệ thống thông tin</input></li>
-                            <li><input type="checkbox">An toàn thông tin</input></li>
-                            <li><input type="checkbox">Trí tuệ nhân tạo</input></li>
-                            <li><input type="checkbox">Khoa học máy tính</input></li>
-                            <li><input type="checkbox">Khoa học dữ liệu</input></li>
-                            <li><input type="checkbox">Điện toán đám mây</input></li>
-                        </ul>
-                    </div>
-                </div> -->
             </div>
-        </div>
+            <div class="main-content">
+                <hr>
+                <div class="option-bar">
+                    <form action="" method="get">
+                        <select name="Khu vực" id="options">
+                            <option value="" selected disabled hidden>Khu vực</option>
+                            <option value="">Quận 3</option>
+                            <option value="">Quận 5</option>
+                            <option value="">Bình Thạnh</option>
+                            <option value="">Thủ đức</option>
+                        </select>
+                        <select name="Thể loại" id="options">
+                            <option value="" selected disabled hidden>Thể loại</option>
+                            <option value="">Cong lap</option>
+                            <option value="">Tu thuc</option>
+                        </select>
+                        <select name="Học phí" id="options">
+                            <option value="" selected disabled hidden>Học phí</option>
+                            <option value="">10</option>
+                            <option value="">20</option>
+                            <option value="">30</option>
+                            <option value="">40</option>
+                        </select>
+                        <select name="Điểm" id="options">
+                            <option value="" selected disabled hidden>Điểm</option>
+                            <option value="">20-24</option>
+                            <option value="">24-26</option>
+                            <option value="">26-28</option>
+                            <option value="">28+</option>
+                        </select>
+                    </form>
+                    
+                </div>
+                <hr>
+            </div>
+        
         {% block main-content %} {% endblock main-content %}
         <!--footer-->
-        
+        <footer>
+            <div id="footer">
+                Email <br>
+                Facebook
+            </div>
+        </footer>
         <!--js-->
         <script src="{%static 'Demo/js/js.js'%}"></script>
     </body>

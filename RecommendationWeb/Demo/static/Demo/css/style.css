@@ -1,3 +1,9 @@
+/* Main */
+.main {
+    background-color: #e0dfdf;
+    height: 100vh;
+}
+
 /* header */
 .header {
     display: flex;
@@ -38,6 +44,11 @@
     /*background-color: #b3b3b3;*/
     color: #fff;
     text-align: center;
+}
+
+.select-btn a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .select-btn i {
@@ -262,6 +273,7 @@
 
 #nav-bar .nav-home {
     margin-left: 80px;
+    width: 12%;
 }
 
 .nav-home a {
@@ -287,21 +299,21 @@
     right: 0;
     background-color: #E97731;
     height: 45px;
-    position: relative;
+    /* position: relative; */
     z-index: 2; /* Higher z-index to ensure it's on top */
+    
 }
 
 #navigation .search-bar {  
-    width: 30%;
+    width: 100%;
     padding: 0 21px;
     cursor: pointer;
+    margin-left: -80px;
 }
 
 .search-bar form {
-    display: flex;
-    width: 42em;
-    align-items: center;
-    margin-left: -120px;
+    /* display: flex; */
+    width: 95%;
 }
 
 .search-bar input[type="text"] {
@@ -320,11 +332,12 @@
 
 .search-bar button {
     position: absolute;
-    background-color: white;
+    background: none;
     border: none;
     cursor: pointer;
     right: 0;
     margin-right: 62px;
+    padding-top: 6px;
 }
 
 #btn-search i {
@@ -447,12 +460,30 @@
     border-radius: 25px;
 }
 
+/* section */
+/* .section {
+    display: flex;
+    justify-content: space-between;
+} */
+
+/*main-content*/
+.main-content {
+    background-color: #4c4343;
+    width: 74.5%;
+    /* float: right; */
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
 /* Định dạng thanh tùy chọn */
 .option-bar {
     width: 100%;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 .option-bar form {
@@ -466,27 +497,14 @@
 
 .option-bar select {
     flex: 0.5;
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 2px;
+    border: none;
     border-radius: 5px;
     outline: none;
-    background-color: white;
-}
-
-.result {
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #C38165;
     
 }
 
-#rs-content {
-    color: white;
-    text-align: left;
-    padding: 10px 0;
-    font-size: 18px;
-}
 /* footer */
 #footer {
     background-color: #E97731;
