@@ -19,7 +19,6 @@ class University(models.Model):
     Max_Tuition_Fee = models.DecimalField(max_digits=9, decimal_places=0, null=True, blank=True)
     Website = models.URLField() 
     Facebook = models.URLField()
-    Fields = models.ManyToManyField(FieldOfStudy ,related_name='universities')
     Score_Link = models.URLField(null=True, blank=True)
 
     def formatted_tuition_fee(self):
