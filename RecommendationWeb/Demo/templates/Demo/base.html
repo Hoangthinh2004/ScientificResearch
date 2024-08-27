@@ -79,13 +79,7 @@
                                 
                                 {% for major_global in majors_globals %}
                                     <li><a href="{% url 'show-one-major' major_global.ID %}">{{major_global.ID}}-{{major_global.Name}}</a></li>
-                                    <!-- <li><a href="">Kinh tế - Tài chính</a></li>
-                                    <li><a href="">Công an - Quân đội</a></li>
-                                    <li><a href="">Ngoại giao - Ngoại ngữ</a></li>
-                                    <li><a href="">Sư phạm - Giáo dục</a></li>
-                                    <li><a href="">Kế toán - Kiểm toán</a></li>
-                                    <li><a href="">Y - Dược</a></li>
-                                    <li><a href="">Xây dựng - Kiến trúc - Giao thông</a></li> -->
+                                    
                                 {% endfor %}
                                     
                             </ul>
@@ -140,36 +134,54 @@
                     <p>description</p>
                 </div>
                 <hr>
-                <div class="option-bar">
-                    <form action="" method="get">
-                        <select name="Khu vực" id="options">
-                            <option value="" selected disabled hidden>Khu vực</option>
-                            <option value="">Quận 3</option>
-                            <option value="">Quận 5</option>
-                            <option value="">Bình Thạnh</option>
-                            <option value="">Thủ đức</option>
-                        </select>
-                        <select name="Thể loại" id="options">
-                            <option value="" selected disabled hidden>Thể loại</option>
-                            <option value="">Cong lap</option>
-                            <option value="">Tu thuc</option>
-                        </select>
-                        <select name="Học phí" id="options">
-                            <option value="" selected disabled hidden>Học phí</option>
-                            <option value="">10</option>
-                            <option value="">20</option>
-                            <option value="">30</option>
-                            <option value="">40</option>
-                        </select>
-                        <select name="Điểm" id="options">
-                            <option value="" selected disabled hidden>Điểm</option>
-                            <option value="">20-24</option>
-                            <option value="">24-26</option>
-                            <option value="">26-28</option>
-                            <option value="">28+</option>
-                        </select>
-                    </form>
-                    
+                <div class="filter-container">
+                    <div class="filter-item">
+                        <div class="dropdown-btn">Khu vực</div>
+                        <div class="dropdown-content">
+                            <label><input type="checkbox" name="region" value="north"> Quận 3</label>
+                            <label><input type="checkbox" name="region" value="south"> Quận 5</label>
+                            <label><input type="checkbox" name="region" value="central"> Bình Thạnh</label>
+                            <label><input type="checkbox" name="region" value="central"> Thủ Đức</label>
+        
+                        </div>
+                    </div>
+                
+                    <div class="filter-item">
+                        <div class="dropdown-btn">Thể loại</div>
+                        <div class="dropdown-content">
+                            <label><input type="checkbox" name="score" value="low"> Công lập</label>
+                            <label><input type="checkbox" name="score" value="high"> Tư thục</label>
+                        </div>
+                    </div>
+                
+                    <div class="filter-item">
+                        <div class="dropdown-btn">Học phí</div>
+                        <div class="dropdown-content">
+                            <label><input type="checkbox" name="category" value="private"> 20</label>
+                            <label><input type="checkbox" name="category" value="public"> 40</label>
+                            <label><input type="checkbox" name="category" value="public1"> 50</label>
+                            <label><input type="checkbox" name="category" value="public2"> 60</label>
+        
+                        </div>
+                    </div>
+        
+                    <div class="filter-item">
+                        <div class="dropdown-btn">Điểm</div>
+                        <div class="dropdown-content">
+                            <label><input type="checkbox" name="category" value="private"> 20 - 23</label>
+                            <label><input type="checkbox" name="category" value="public"> 23 - 25</label>
+                            <label><input type="checkbox" name="category" value="public1"> 25 -27</label>
+                            <label><input type="checkbox" name="category" value="public2"> 27+</label>
+        
+                        </div>
+                    </div>
+                
+                    <!-- Reset Button -->
+                    <button id="reset-filters">Reset Filters</button>
+                </div>
+                <!-- Selected Filters -->
+                <div class="selected-filters">
+                    <!-- Display selected options here -->
                 </div>
                 <hr>
                 {% block main-content %} {% endblock main-content %}
