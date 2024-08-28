@@ -42,7 +42,7 @@
                             </a>
                             <i class="uil uil-angle-down"></i>
                         </div>
-                        <div class="content" me>
+                        <div class="content">
                             <form class="search" method="GET" action="{% url 'list-university' %}">
                                 <i class="uil uil-search"></i>
                                 <input type="text" name="u" placeholder="Search" list="university-list">
@@ -50,7 +50,9 @@
                             <ul class="options">
                                 
                                 {% for uni_global in unis_globals %}
-                                    <li><a href="{% url 'show-one-university' uni_global.ID %}">{{uni_global.ID}}-{{uni_global.Name}}</a></li>
+                                <li class="option-u" data-university-id="{{ uni_global.ID }}" data-university-name="{{ uni_global.Name }}">
+                                    <a href="{% url 'show-one-university' uni_global.ID %}">{{ uni_global.ID }}-{{ uni_global.Name }}</a>
+                                </li>
                                     <!-- <li><a href="home1.html">FPT</a></li>
                                     <li><a href="home1.html">Hutech</a></li>
                                     <li><a href="home1.html">USSH</a></li>
@@ -78,7 +80,9 @@
                             <ul class="options-1">
                                 
                                 {% for major_global in majors_globals %}
-                                    <li><a href="{% url 'show-one-major' major_global.ID %}">{{major_global.ID}}-{{major_global.Name}}</a></li>
+                                <li class="option-m" data-major-id="{{ major_global.ID }}" data-major-name="{{ major_global.Name }}">
+                                    <a href="{% url 'show-one-major' major_global.ID %}">{{ major_global.ID }}-{{ major_global.Name }}</a>
+                                </li>
                                     
                                 {% endfor %}
                                     
