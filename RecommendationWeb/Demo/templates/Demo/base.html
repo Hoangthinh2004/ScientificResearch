@@ -94,8 +94,7 @@
                     </form>
                 </div>
             </div>
-
-            <div class = "section"> 
+ 
             <!--side-bar-->
             <div class="side-bar">
                 <h2>Nhóm Ngành</h2>
@@ -129,10 +128,11 @@
             <!-- End Side Bar -->                   
             
             <div class="main-content">
-                <div> <!--Phần này thay đổi theo trường hoặc khối ngành, còn ở home sẽ không xuất hiện-->
+                {% comment %} <div> <!--Phần này thay đổi theo trường hoặc khối ngành, còn ở home sẽ không xuất hiện-->
                     <h3>Title</h3>
                     <p>description</p>
-                </div>
+                </div> {% endcomment %}
+                {%block title%}{%endblock title%}
                 <hr>
                 <div class="filter-container">
                     <div class="filter-item">
@@ -149,18 +149,18 @@
                     <div class="filter-item">
                         <div class="dropdown-btn">Thể loại</div>
                         <div class="dropdown-content">
-                            <label><input type="checkbox" name="score" value="low"> Công lập</label>
-                            <label><input type="checkbox" name="score" value="high"> Tư thục</label>
+                            <label><input type="checkbox" name="type" value="low"> Công lập</label>
+                            <label><input type="checkbox" name="type" value="high"> Tư thục</label>
                         </div>
                     </div>
                 
                     <div class="filter-item">
                         <div class="dropdown-btn">Học phí</div>
                         <div class="dropdown-content">
-                            <label><input type="checkbox" name="category" value="private"> 20</label>
-                            <label><input type="checkbox" name="category" value="public"> 40</label>
-                            <label><input type="checkbox" name="category" value="public1"> 50</label>
-                            <label><input type="checkbox" name="category" value="public2"> 60</label>
+                            <label><input type="checkbox" name="fee" value="private"> 20</label>
+                            <label><input type="checkbox" name="fee" value="public"> 40</label>
+                            <label><input type="checkbox" name="fee" value="public1"> 50</label>
+                            <label><input type="checkbox" name="fee" value="public2"> 60</label>
         
                         </div>
                     </div>
@@ -168,10 +168,10 @@
                     <div class="filter-item">
                         <div class="dropdown-btn">Điểm</div>
                         <div class="dropdown-content">
-                            <label><input type="checkbox" name="category" value="private"> 20 - 23</label>
-                            <label><input type="checkbox" name="category" value="public"> 23 - 25</label>
-                            <label><input type="checkbox" name="category" value="public1"> 25 -27</label>
-                            <label><input type="checkbox" name="category" value="public2"> 27+</label>
+                            <label><input type="checkbox" name="score" value="private"> 20 - 23</label>
+                            <label><input type="checkbox" name="score" value="public"> 23 - 25</label>
+                            <label><input type="checkbox" name="score" value="public1"> 25 -27</label>
+                            <label><input type="checkbox" name="score" value="public2"> 27+</label>
         
                         </div>
                     </div>
@@ -186,7 +186,6 @@
                 <hr>
                 {% block main-content %} {% endblock main-content %}
             </div>
-        </div>
         </div>
         
         <!--footer-->
