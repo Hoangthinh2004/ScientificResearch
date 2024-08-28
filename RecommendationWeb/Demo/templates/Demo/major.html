@@ -5,7 +5,7 @@
     <div class="fieldofmajor-details">
         <div class="header">
             <img src="" alt=""> <!--Icon major-->
-            <h2>Công nghệ thông tin</h2>
+            <h2>{{major.ID}}-{{major.Name}}</h2>
         </div>
         <div class="description">
             <p>Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm</p>
@@ -16,13 +16,26 @@
 
 <!--List majoruni của khối ngành-->
 <div class="list-major">
-    <div class="major-item-field">
-        <p>Kỹ thuật phần mềm</p>
-        <p>Đại học FPT</p>
-        <p>22</p>
-        <p>~90 triệu/năm</p>
-    </div>
-    <div class="major-item-field">
+    
+    {% for uni_major in uni_majors %}
+        <div class="major-item-field">
+            <p>{{uni_major.MajorID.Name}}</p>
+            <p>{{uni_major.UniID.Name}}</p>
+            <p>22</p>
+            <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
+        </div>
+    {% endfor %}
+
+    {% for major in majors %}
+        <div class="major-item-field">
+            <p>{{major.MajorID.Name}}</p>
+            <p>{{major.UniID.Name}}</p>
+            <p>22</p>
+            <p>~{{major.Tuition_Fee}} triệu/năm</p>
+        </div>
+    {% endfor %}
+        
+    <!-- <div class="major-item-field">
         <p>Công nghệ thông tin</p>
         <p>Đại học Hutech</p>
         <p>21</p>
@@ -33,6 +46,6 @@
         <p>Đại học Bách Khoa</p>
         <p>28</p>
         <p>~80 triệu/năm</p>
-    </div>
+    </div> -->
 </div>
 {% endblock main-content %}

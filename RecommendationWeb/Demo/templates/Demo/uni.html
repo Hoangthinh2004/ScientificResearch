@@ -4,27 +4,73 @@
     <div class="">
         <div class="">
             <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
-            <h2>Trường đại học FPT HCM</h2>
+            <h2>{{uni.ID}}-{{uni.Name}}</h2>
         </div>
         <div class="">
-            <p>Chương trình đào tạo của trường Đại học FPT được thiết kế dựa trên sự tham vấn của chuyên gia, chú trọng thực hành, phù hợp với nhu cầu của nhà tuyển dụng tìm kiếm ở nguồn nhân lực thế hệ mới.</p>
+            <p>{{uni.Description}}</p>
         </div>
         <div class="">
-            <span>Điểm: Từ 16 - 21 điểm</span>
-            <span class="">Học phí: Từ 70 ~ 90 tr/năm</span>
-            <span>Facebook</span>
-            <span>Website</span>
-            <span>Facebook</span>
-            <span>Địa chỉ</span>
+            <span>Điểm: Từ {{uni.Min_Score}} - {{uni.Max_Score}} điểm</span><br>
+            <span class="">Học phí: Từ {{uni.Min_Tuition_Fee}} ~ {{uni.Max_Tuition_Fee}} tr/năm</span><br>
+            <span>Website: <a href="{{uni.Website}}"></a></span><br>
+            <span>Facebook: <a href="{{uni.Facebook}}"></a></span><br>
+            <span>Tham khảo điểm tại: <a href="{{uni.Score_Link}}"></a></span><br>
         </div>
     </div>
+
+    <div class="uni-list">
+    
+        {% for uni in unis %}
+            <a href="{% url 'show-one-university' uni.ID %}">
+                <div class="university-item">
+                    <div class="logo-university">
+                        <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
+                    </div>
+                    <div class="university-information">
+                        <div class="university-header">
+                            <h3>{{uni.ID}} - {{uni.Name}}</h3>
+                            <p class="university-type">{{uni.Name}}</p>
+                            <p class="university-fee">Học phí ~ 90 tr/năm</p>
+                        </div> 
+                        <div class="university-description">
+                            <p>{{uni.Description}}</p>
+                        </div>
+                        <div class="university-location">
+                            <p><strong>Cơ sở:</strong></p> 
+                            
+                            {% for campus_global in campus_globals %}
+                                <!--ở đây có thể co nhiều cơ sở, ví dụ Thủ đức | Quy Nhơn | Hà nội-->
+                                {% if campus_global.Uni.ID == uni.ID %}
+                                    <p class = "location">{{campus_global.Region.Name}}</p> 
+                                {% endif %}
+                                    
+                            {% endfor %}
+                                 
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>    
 {%endblock title%}
 {% block main-content %}
     <!--List các full ngành của trường-->
-    <div class="university-major">
-        <p>Kỹ thuật phần mềm</p>
-        <p>A00: 23</p>
-        <p>~ 90 Triệu/Năm</p>
-    </div>
+    
+    {% for uni_major in uni_majors %}
+        
+        {% for comb_major in comb_majors %}
+            
+            {% if comb_major.Major.ID == uni_major.MajorID.ID %}
+                <div class="university-major">
+                    <p>{{uni_major.M_Name}}</p>
+                    <p>{{comb_major.Comb.ID}}: {{comb_major.Score}}</p>
+                    <p>~ {{uni_major.Tuition_Fee}} Triệu/Năm</p>
+                </div>
+            {% endif %}
+                
+        {% endfor %}
+            
+    {% endfor %}
+        
 {% endblock main-content %}
         

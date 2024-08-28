@@ -50,7 +50,7 @@
                             <ul class="options">
                                 
                                 {% for uni_global in unis_globals %}
-                                <li class="option-u" data-university-id="{{ uni_global.ID }}" data-university-name="{{ uni_global.Name }}">
+                                <li class="option-u" name="uni_id" value="{{uni_global.ID}}" data-university-id="{{ uni_global.ID }}" data-university-name="{{ uni_global.Name }}">
                                     <a href="{% url 'show-one-university' uni_global.ID %}">{{ uni_global.ID }}-{{ uni_global.Name }}</a>
                                 </li>
                                     <!-- <li><a href="home1.html">FPT</a></li>
@@ -73,14 +73,14 @@
                             <i class="uil uil-angle-down"></i>
                         </div>
                         <div class="content-1">
-                            <div class="search-1">
+                            <form class="search-1" method="GET" action="{% url 'list-major' %}">
                                 <i class="uil uil-search"></i>
                                 <input id="input-1" name="m" type="text" placeholder="Search" list="field-of-study-list">
-                            </div>
+                            </form>
                             <ul class="options-1">
                                 
                                 {% for major_global in majors_globals %}
-                                <li class="option-m" data-major-id="{{ major_global.ID }}" data-major-name="{{ major_global.Name }}">
+                                <li class="option-m" name="major_id" value="{{ major_global.ID }}" data-major-id="{{ major_global.ID }}" data-major-name="{{ major_global.Name }}">
                                     <a href="{% url 'show-one-major' major_global.ID %}">{{ major_global.ID }}-{{ major_global.Name }}</a>
                                 </li>
                                     
@@ -142,10 +142,12 @@
                     <div class="filter-item">
                         <div class="dropdown-btn">Khu vực</div>
                         <div class="dropdown-content">
-                            <label><input type="checkbox" name="region" value="north"> Quận 3</label>
-                            <label><input type="checkbox" name="region" value="south"> Quận 5</label>
-                            <label><input type="checkbox" name="region" value="central"> Bình Thạnh</label>
-                            <label><input type="checkbox" name="region" value="central"> Thủ Đức</label>
+                            {% for region_global in region_globals %}
+                                <label><input type="checkbox" name="region" value="{{region_global.ID}}"> {{region_global.Name}}</label>
+                                <!-- <label><input type="checkbox" name="region" value="south"> Quận 5</label>
+                                <label><input type="checkbox" name="region" value="central"> Bình Thạnh</label>
+                                <label><input type="checkbox" name="region" value="central"> Thủ Đức</label> -->
+                            {% endfor %}
         
                         </div>
                     </div>
@@ -153,8 +155,10 @@
                     <div class="filter-item">
                         <div class="dropdown-btn">Thể loại</div>
                         <div class="dropdown-content">
-                            <label><input type="checkbox" name="type" value="low"> Công lập</label>
-                            <label><input type="checkbox" name="type" value="high"> Tư thục</label>
+                            {% for type in type_globals %}
+                            <label><input type="checkbox" name="type" value="{{type}}"> {{type}}</label>
+                            <!-- <label><input type="checkbox" name="type" value="high"> Tư thục</label> -->
+                        {% endfor %}
                         </div>
                     </div>
                 
