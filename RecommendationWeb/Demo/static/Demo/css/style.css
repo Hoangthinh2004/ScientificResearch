@@ -1,14 +1,16 @@
 /* Main */
-.main {
+html,body {
     background-color: #e0dfdf;
-    height: 100vh;
+    height: 100%;
+
 }
+
 
 /* header */
 .header {
     display: flex;
     align-items: center;
-
+    background-color: #fff;
 }
 
 .logo img {
@@ -296,6 +298,7 @@
     margin-left: -100px;
     
 }
+
 /* Định dạng thanh tìm kiếm */
 #navigation {
     display: flex;    
@@ -359,7 +362,7 @@
     padding: 20px;
     background-color: #fff;
     border-right: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     margin: 10px;
     border-radius: 5px;
     /* Ensure sidebar is behind the navigation */
@@ -492,6 +495,7 @@
     display: inline-block;
     background-color: #fff;
     width: 78.5%;
+    height: 100%;
     margin-right: 10px;
     margin-top: 10px;
     border-radius: 5px;
@@ -596,9 +600,102 @@
 /* footer */
 #footer {
     background-color: #E97731;
-    margin-top: 800px;
+    margin-top: 550px;
 }
 
+/* home.html */
+.uni-major-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0 3px;
+    margin-bottom: 10px;
+}
+
+.university-item, .major-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px;
+    background-color: #FFD0B5;
+    border: 1px solid orange;
+    border-radius: 16px;
+}
+
+.logo-university img {
+    width: 144px; /* Kích thước cố định cho hình ảnh */
+    height: 140px;
+    border-radius: 10px;
+}
+
+.university-header {
+    display: flex;
+}
+
+.university-header p {
+    border-radius: 30px;
+    background-color: #F8E6DB;
+    padding: 3px 10px;
+    color: #1d1b1b;
+}
+
+.university-header h2, .major-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.university-information {
+    flex: 1;
+}
+
+.university-location {
+    display: flex;
+    margin-top: -8px;
+}
+
+.location {
+    border-radius: 30px;
+    background-color: #F8E6DB;
+    padding: 3px 10px;
+    color: #1d1b1b;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.university-description p, .major-description p {
+    margin-top: -10px;
+    color: #0f0e0e;
+}
+
+.university-type {
+    margin-left: 20px;
+}
+
+.university-fee {
+    margin-left: auto;
+    margin-right: 14px;
+}
+
+.icon-major img {
+    width: 144px; /* Kích thước cố định cho hình ảnh */
+    height: 140px;
+    border-radius: 10px;
+}
+
+/* uni.html */
+.university-major {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* major.html */
+.major-item-field {
+    display: flex;
+    justify-content: space-around;
+    background-color: #FFD0B5;
+    border: 1px solid orange;
+    margin-bottom: 5px;
+}
 
 
 

@@ -1,30 +1,30 @@
 {% extends 'Demo/base.html' %}
 {% load static %}
-{% block main-content %}
-    <!--thông tin trường-->
-    <div class="university-item">
-        <div class="university-header">
+{%block title%}
+    <div class="">
+        <div class="">
             <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
             <h2>Trường đại học FPT HCM</h2>
         </div>
-        <div class="university-description">
+        <div class="">
             <p>Chương trình đào tạo của trường Đại học FPT được thiết kế dựa trên sự tham vấn của chuyên gia, chú trọng thực hành, phù hợp với nhu cầu của nhà tuyển dụng tìm kiếm ở nguồn nhân lực thế hệ mới.</p>
         </div>
-        <div class="university-details">
+        <div class="">
             <span>Điểm: Từ 16 - 21 điểm</span>
-            <span class="university-fee">Học phí: Từ 70 ~ 90 tr/năm</span>
+            <span class="">Học phí: Từ 70 ~ 90 tr/năm</span>
             <span>Facebook</span>
             <span>Website</span>
             <span>Facebook</span>
             <span>Địa chỉ</span>
         </div>
     </div>
+{%endblock title%}
+{% block main-content %}
     <!--List các full ngành của trường-->
     <div class="university-major">
-        <span>Kỹ thuật phần mềm</span>
-        <span>Hệ thống thông tin</span>
-        <span>Kinh doanh quốc tế</span>
-        <span>Thiết kế đồ họa</span>
+        <p>Kỹ thuật phần mềm</p>
+        <p>A00: 23</p>
+        <p>~ 90 Triệu/Năm</p>
     </div>
 {% endblock main-content %}
         
