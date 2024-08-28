@@ -92,42 +92,82 @@ document.querySelectorAll('.options-sb li').forEach(function(item) {
 });
 
 //droplist cho side bar
-
-// Lấy tất cả các droplist trong sidebar
 document.addEventListener('DOMContentLoaded', () => {
     const selects = document.querySelectorAll('.select-sidebar');
 
     selects.forEach(select => {
         select.addEventListener('click', () => {
             const contentSidebar = select.parentElement;
-            
+
             // Close other active droplists
             document.querySelectorAll('.content-sidebar.active').forEach(activeSidebar => {
                 if (activeSidebar !== contentSidebar) {
                     activeSidebar.classList.remove('active');
                 }
             });
-            
+
             // Toggle 'active' class for current droplist
             contentSidebar.classList.toggle('active');
         });
     });
+
+    // Search filter logic
+    const input = document.getElementById('input-sb');
+    const allFields = document.querySelectorAll('.content-sidebar');
+
+    input.addEventListener('input', function () {
+        const filter = input.value.toLowerCase(); // Convert input to lowercase for case-insensitive search
+
+        allFields.forEach(field => {
+            const text = field.querySelector('.select-sidebar span').innerText.toLowerCase();
+            if (text.includes(filter)) {
+                field.style.display = ''; // Show matching fields
+            } else {
+                field.style.display = 'none'; // Hide non-matching fields
+            }
+        });
+    });
 });
 
-// Lấy phần tử input và tất cả các phần tử nhóm ngành
-const input = document.getElementById('input-sb');
-const allFields = document.querySelectorAll('.select-sidebar');
 
-// Thêm sự kiện khi người dùng nhập vào ô tìm kiếm
-input.addEventListener('input', function() {
-    const filter = input.value.toLowerCase(); // Chuyển tất cả chữ cái sang chữ thường
+//Filter- bộ lọc 
+const selectedFilters = document.querySelector('.selected-filters');
+const resetButton = document.getElementById('reset-filters');
 
-    allFields.forEach(field => {
-        const text = field.innerText.toLowerCase();
-        if (text.includes(filter)) {
-            field.parentElement.style.display = ''; // Hiển thị nhóm ngành phù hợp
-        } else {
-            field.parentElement.style.display = 'none'; // Ẩn nhóm ngành không phù hợp
-        }
+// Handle checkbox selection
+document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        updateSelectedFilters();
     });
+});
+
+// Update selected filters display
+function updateSelectedFilters() {
+    selectedFilters.innerHTML = '';
+
+    const filterGroups = {};
+
+    document.querySelectorAll('.dropdown-content input[type="checkbox"]:checked').forEach(checkbox => {
+        const dropdownLabel = checkbox.closest('.filter-item').querySelector('.dropdown-btn').textContent.trim();
+        const selectedValue = checkbox.nextSibling.textContent.trim();
+
+        if (!filterGroups[dropdownLabel]) {
+            filterGroups[dropdownLabel] = [];
+        }
+        filterGroups[dropdownLabel].push(selectedValue);
+    });
+
+    for (const [label, values] of Object.entries(filterGroups)) {
+        const filterTag = document.createElement('span');
+        filterTag.textContent = `${label}: ${values.join(', ')}`;
+        selectedFilters.appendChild(filterTag);
+    }
+}
+
+// Reset filters
+resetButton.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    selectedFilters.innerHTML = '';
 });
