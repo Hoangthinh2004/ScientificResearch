@@ -1,17 +1,17 @@
 {% extends 'Demo/base.html' %}
 {% load static %}
 {%block title%}
-    <div class="">
-        <div class="">
+    <div class="uni-title">
+        <div class="uni-header">
             <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
             <h2>{{uni.ID}}-{{uni.Name}}</h2>
         </div>
-        <div class="">
+        <div class="uni-description">
             <p>{{uni.Description}}</p>
         </div>
-        <div class="">
+        <div class="uni-details">
             <span>Điểm: Từ {{uni.Min_Score}} - {{uni.Max_Score}} điểm</span><br>
-            <span class="">Học phí: Từ {{uni.Min_Tuition_Fee}} ~ {{uni.Max_Tuition_Fee}} tr/năm</span><br>
+            <span>Học phí: Từ {{uni.Min_Tuition_Fee}} ~ {{uni.Max_Tuition_Fee}} tr/năm</span><br>
             <span>Website: <a href="{{uni.Website}}"></a></span><br>
             <span>Facebook: <a href="{{uni.Facebook}}"></a></span><br>
             <span>Tham khảo điểm tại: <a href="{{uni.Score_Link}}"></a></span><br>
