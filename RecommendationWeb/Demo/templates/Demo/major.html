@@ -18,12 +18,21 @@
 <div class="list-major">
     
     {% for uni_major in uni_majors %}
-        <div class="major-item-field">
-            <p>{{uni_major.MajorID.Name}}</p>
-            <p>{{uni_major.UniID.Name}}</p>
-            <p>22</p>
-            <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
-        </div>
+        
+        {% for comb_major in comb_majors %}
+            
+            {% if comb_major.Major.ID == uni_major.MajorID.ID %}
+                <div class="major-item-field">
+                    <p>{{uni_major.MajorID.Name}}</p>
+                    <p>{{uni_major.UniID.Name}}</p>
+                    <p>{{comb_major.Comb.ID}}</p>
+                    <p>{{comb_major.Score}}</p>
+                    <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
+                </div>
+            {% endif %}
+                
+        {% endfor %}
+            
     {% endfor %}
 
     {% for major in majors %}

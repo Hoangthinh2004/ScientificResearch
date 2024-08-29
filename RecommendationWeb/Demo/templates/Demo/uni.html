@@ -54,23 +54,18 @@
     </div>    
 {%endblock title%}
 {% block main-content %}
-    <!--List các full ngành của trường-->
+    <!--List full các ngành của trường-->
     
-    {% for uni_major in uni_majors %}
-        
-        {% for comb_major in comb_majors %}
-            
-            {% if comb_major.Major.ID == uni_major.MajorID.ID %}
-                <div class="university-major">
-                    <p>{{uni_major.M_Name}}</p>
-                    <p>{{comb_major.Comb.ID}}: {{comb_major.Score}}</p>
-                    <p>~ {{uni_major.Tuition_Fee}} Triệu/Năm</p>
-                </div>
-            {% endif %}
-                
+    <div class="list-major">
+    
+        {% for uni_major in uni_majors %}
+            <div class="major-item-field">
+                <p>{{uni_major.MajorID.Name}}</p>
+                <p>{{uni_major.UniID.Name}}</p>
+                <p>A0 22</p>
+                <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
+            </div>
         {% endfor %}
-            
-    {% endfor %}
-        
+    </div>
 {% endblock main-content %}
         
