@@ -12,7 +12,7 @@ class University(models.Model):
     Name = models.CharField(max_length=200)
     Type = models.CharField(max_length=100)
     Description = models.TextField(max_length=5000, null=True, blank=True)
-    Logo = models.ImageField(upload_to='logos/')
+    Logo = models.ImageField(upload_to='logos/', blank=True, null=True)
     Min_Score = models.DecimalField(max_digits=4, decimal_places=2)
     Max_Score = models.DecimalField(max_digits=4, decimal_places=2)
     Min_Tuition_Fee = models.DecimalField(max_digits=6, decimal_places=0, null=True, blank=True)
