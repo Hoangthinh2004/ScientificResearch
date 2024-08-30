@@ -1,48 +1,70 @@
 {% extends 'Demo/base.html' %}
 {% load static %}
+{% load custom_tags %}
 {%block title%} 
     <!--Thông tin tổng quan của khối ngành-->
-    <div class="fieldofmajor-title">
-        <div class="field-header">
-            <img src="" alt=""> <!--Icon major-->
-            <h2>{{major.ID}}-{{major.Name}}</h2>
+    
+    {% if major %}
+        <div class="fieldofmajor-title">
+            <div class="field-header">
+                <img src="" alt=""> <!--Icon major-->
+                <h2>{{major.ID}}-{{major.Name}}</h2>
+            </div>
+            <div class="field-description">
+                <p>Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm</p>
+            </div>
         </div>
-        <div class="field-description">
-            <p>Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm</p>
-        </div>
-    </div>
+    {% endif %}
+        
 {%endblock title%}
 {% block main-content %}
 
 <!--List majoruni của khối ngành-->
 <div class="list-major">
-    
-    {% for uni_major in uni_majors %}
-        
-        {% for comb_major in comb_majors %}
-            
-            {% if comb_major.Major.ID == uni_major.MajorID.ID %}
-                <div class="major-item-field">
-                    <p>{{uni_major.MajorID.Name}}</p>
-                    <p>{{uni_major.UniID.Name}}</p>
-                    <p>{{comb_major.Comb.ID}}</p>
-                    <p>{{comb_major.Score}}</p>
-                    <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
-                </div>
-            {% endif %}
-                
-        {% endfor %}
-            
-    {% endfor %}
 
+
+{% set None as score_previous %}
+{% for uni_major in uni_majors %}
+    
+    <div class="major-item-field">
+        <p>{{ uni_major.MajorID.Name }}</p>
+        <p>{{ uni_major.UniID.Name }}</p>
+        <p>
+            {% for comb_major in comb_majors %}
+                {% if comb_major.Major.ID == uni_major.MajorID.ID %}
+                    {% if comb_major.Score != score_previous %}
+                        {% set comb_major.Score as score_previous %}
+                        
+                        {# Display all combinations with the same score for this major #}
+                        {% for comb in comb_majors %}
+                            {% if comb.Major.ID == comb_major.Major.ID and comb.Score == score_previous %}
+                                {{ comb.Comb.ID }} 
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {{ score_previous }} 
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p>~{{ uni_major.Tuition_Fee }} triệu/năm</p>
+    </div>
+
+{% endfor %}
+
+
+    
+    {% comment %}
     {% for major in majors %}
-        <div class="major-item-field">
-            <p>{{major.MajorID.Name}}</p>
-            <p>{{major.UniID.Name}}</p>
-            <p>22</p>
-            <p>~{{major.Tuition_Fee}} triệu/năm</p>
-        </div>
-    {% endfor %}
+    <!-- <div class="major-item-field">
+        <p>{{major.MajorID.Name}}</p>
+        <p>{{major.UniID.Name}}</p>
+        <p>22</p>
+        <p>~{{major.Tuition_Fee}} triệu/năm</p>
+    </div> -->
+{% endfor %}
+    {% endcomment %}
+        
         
     <!-- <div class="major-item-field">
         <p>Công nghệ thông tin</p>

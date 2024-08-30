@@ -47,11 +47,13 @@ def unimajor(request, uid, mid):
 
 def listMajor(request):
     url = 'filter-major'
-    majors = UniMajor.objects.all()
+    uni_majors = UniMajor.objects.all()
+    comb_majors = CombMajor.objects.all()
     if request.method == 'GET' and request.GET.get('m') is not None:
         m = request.GET.get('m')
-        majors = UniMajor.objects.filter(Q(MajorID__ID__icontains=m) | Q(MajorID__Name__icontains=m))
-    context = {'majors': majors, 'url': reverse(url)}
+        uni_majors = UniMajor.objects.filter(Q(MajorID__ID__icontains=m) | Q(MajorID__Name__icontains=m))
+        comb_majors = CombMajor.objects.filter(Q(Major__FieldID__ID=m) | Q(Major__ID=m))
+    context = {'uni_majors': uni_majors, 'comb_majors': comb_majors, 'url': reverse(url)}
     return render(request,'Demo/major.html', context)
 
 def showOneMajor(request, pk):
@@ -66,6 +68,7 @@ def filter(request):
     unis = University.objects.all()
     majors = Major.objects.all()
     uni_majors = UniMajor.objects.all()
+    comb_majors = CombMajor.objects.all()
     #Filtering by region
     selected_regions = request.GET.getlist('region')
     if selected_regions:
@@ -93,10 +96,11 @@ def filter(request):
         for q in query:
             query |= q
         unis = unis.filter(query)
-    uni_majors = uni_majors.filter(UniID__ID__in=unis)
-    majors = majors.filter(ID__in=uni_majors)
+    uni_majors = uni_majors.filter(UniID__in=unis)
+    comb_majors = comb_majors.filter(Uni__in=unis)
+    majors = majors.filter(ID__in=uni_majors.values_list('MajorID', flat=True))
     query_params = request.GET.copy().urlencode()
-    context = {'unis': unis, 'uni_majors': uni_majors, 'majors': majors}
+    context = {'unis': unis, 'uni_majors': uni_majors, 'majors': majors, 'comb_majors': comb_majors}
     # Reconstruct query parameters for the URL
     
 

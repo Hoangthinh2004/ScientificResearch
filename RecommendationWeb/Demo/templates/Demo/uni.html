@@ -1,70 +1,95 @@
 {% extends 'Demo/base.html' %}
 {% load static %}
 {%block title%}
-    <div class="uni-title">
-        <div class="uni-header">
-            <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
-            <h2>{{uni.ID}}-{{uni.Name}}</h2>
-        </div>
-        <div class="uni-description">
-            <p>{{uni.Description}}</p>
-        </div>
-        <div class="uni-details">
-            <span>Điểm: Từ {{uni.Min_Score}} - {{uni.Max_Score}} điểm</span><br>
-            <span>Học phí: Từ {{uni.Min_Tuition_Fee}} ~ {{uni.Max_Tuition_Fee}} tr/năm</span><br>
-            <span>Website: <a href="{{uni.Website}}"></a></span><br>
-            <span>Facebook: <a href="{{uni.Facebook}}"></a></span><br>
-            <span>Tham khảo điểm tại: <a href="{{uni.Score_Link}}"></a></span><br>
-        </div>
-    </div>
-
-    <div class="uni-list">
     
-        {% for uni in unis %}
-            <a href="{% url 'show-one-university' uni.ID %}">
-                <div class="university-item">
-                    <div class="logo-university">
-                        <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
-                    </div>
-                    <div class="university-information">
-                        <div class="university-header">
-                            <h3>{{uni.ID}} - {{uni.Name}}</h3>
-                            <p class="university-type">{{uni.Name}}</p>
-                            <p class="university-fee">Học phí ~ 90 tr/năm</p>
-                        </div> 
-                        <div class="university-description">
-                            <p>{{uni.Description}}</p>
-                        </div>
-                        <div class="university-location">
-                            <p><strong>Cơ sở:</strong></p> 
-                            
-                            {% for campus_global in campus_globals %}
-                                <!--ở đây có thể co nhiều cơ sở, ví dụ Thủ đức | Quy Nhơn | Hà nội-->
-                                {% if campus_global.Uni.ID == uni.ID %}
-                                    <p class = "location">{{campus_global.Region.Name}}</p> 
-                                {% endif %}
-                                    
-                            {% endfor %}
-                                 
-                        </div>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>    
+    {% if uni %}
+        <div class="uni-title">
+            <div class="uni-header">
+                <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
+                <h2>{{uni.ID}}-{{uni.Name}}</h2>
+            </div>
+            <div class="uni-description">
+                <p>{{uni.Description}}</p>
+            </div>
+            <div class="uni-details">
+                <span>Điểm: Từ {{uni.Min_Score}} - {{uni.Max_Score}} điểm</span><br>
+                <span>Học phí: Từ {{uni.Min_Tuition_Fee}} ~ {{uni.Max_Tuition_Fee}} tr/năm</span><br>
+                <span>Website: <a href="{{uni.Website}}"></a></span><br>
+                <span>Facebook: <a href="{{uni.Facebook}}"></a></span><br>
+                <span>Tham khảo điểm tại: <a href="{{uni.Score_Link}}"></a></span><br>
+            </div>
+        </div>
+    {% endif %}
+        
+
+        
 {%endblock title%}
 {% block main-content %}
+
+<div class="uni-list">
+    <!-- List danh sách Trường đại học -->
+    {% for uni in unis %}
+        <a href="{% url 'show-one-university' uni.ID %}">
+            <div class="university-item">
+                <div class="logo-university">
+                    <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
+                </div>
+                <div class="university-information">
+                    <div class="university-header">
+                        <h3>{{uni.ID}} - {{uni.Name}}</h3>
+                        <p class="university-type">{{uni.Name}}</p>
+                        <p class="university-fee">Học phí ~ 90 tr/năm</p>
+                    </div> 
+                    <div class="university-description">
+                        <p>{{uni.Description}}</p>
+                    </div>
+                    <div class="university-location">
+                        <p><strong>Cơ sở:</strong></p> 
+                        
+                        {% for campus_global in campus_globals %}
+                            <!--ở đây có thể co nhiều cơ sở, ví dụ Thủ đức | Quy Nhơn | Hà nội-->
+                            {% if campus_global.Uni.ID == uni.ID %}
+                                <p class = "location">{{campus_global.Region.Name}}</p> 
+                            {% endif %}
+                                
+                        {% endfor %}
+                             
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
     <!--List full các ngành của trường-->
     
     <div class="list-major">
     
         {% for uni_major in uni_majors %}
-            <div class="major-item-field">
-                <p>{{uni_major.MajorID.Name}}</p>
-                <p>{{uni_major.UniID.Name}}</p>
-                <p>A0 22</p>
-                <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
-            </div>
+            
+            {% for comb_major in comb_majors %}
+                
+                {% if comb_major.Major.ID == uni_major.MajorID.ID %}
+                    <div class="major-item-field">
+                        <p>{{uni_major.MajorID.Name}}</p>
+                        <p>{{uni_major.UniID.Name}}</p>
+                        <p>
+                            
+                            {% for comb in comb_majors %}
+                                
+                                {% if comb.Major.ID == comb_major.Major.ID and comb.Score == comb_major.Score %}
+                                    {{comb.Comb.ID}}
+                                {% endif %}
+                                    
+                            {% endfor %}
+                                
+                            {{comb_major.Score}}
+                        </p>
+                        <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
+                    </div>
+                {% endif %}
+                
+            {% endfor %}
+                
         {% endfor %}
     </div>
 {% endblock main-content %}
