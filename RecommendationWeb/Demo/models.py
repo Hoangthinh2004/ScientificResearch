@@ -65,7 +65,6 @@ class Combination(models.Model):
 class CombMajor(models.Model):
     Uni = models.ForeignKey(University, on_delete=models.CASCADE)
     Major = models.ForeignKey(Major, on_delete=models.CASCADE)
-    M_Name = models.CharField(max_length=200)
     Comb = models.ForeignKey(Combination, on_delete=models.CASCADE)
     Score = models.DecimalField(max_digits=5, decimal_places=2)
 
