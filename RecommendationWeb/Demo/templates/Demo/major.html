@@ -1,6 +1,5 @@
 {% extends 'Demo/base.html' %}
 {% load static %}
-{% load custom_tags %}
 {%block title%} 
     <!--Thông tin tổng quan của khối ngành-->
     
@@ -21,37 +20,34 @@
 
 <!--List majoruni của khối ngành-->
 <div class="list-major">
-
-
-{% set None as score_previous %}
-{% for uni_major in uni_majors %}
     
-    <div class="major-item-field">
-        <p>{{ uni_major.MajorID.Name }}</p>
-        <p>{{ uni_major.UniID.Name }}</p>
-        <p>
+    {% for uni_major in uni_majors %}
+            
             {% for comb_major in comb_majors %}
+                
                 {% if comb_major.Major.ID == uni_major.MajorID.ID %}
-                    {% if comb_major.Score != score_previous %}
-                        {% set comb_major.Score as score_previous %}
-                        
-                        {# Display all combinations with the same score for this major #}
-                        {% for comb in comb_majors %}
-                            {% if comb.Major.ID == comb_major.Major.ID and comb.Score == score_previous %}
-                                {{ comb.Comb.ID }} 
-                            {% endif %}
-                        {% endfor %}
-                        
-                        {{ score_previous }} 
-                    {% endif %}
+                    <div class="major-item-field">
+                        <p>{{uni_major.MajorID.Name}}</p>
+                        <p>{{uni_major.UniID.Name}}</p>
+                        <p>
+                            
+                            {% for comb in comb_majors %}
+                                
+                                {% if comb.Major.ID == comb_major.Major.ID and comb.Score == comb_major.Score %}
+                                    {{comb.Comb.ID}}
+                                {% endif %}
+                                    
+                            {% endfor %}
+                                
+                            {{comb_major.Score}}
+                        </p>
+                        <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
+                    </div>
                 {% endif %}
+                
             {% endfor %}
-        </p>
-        <p>~{{ uni_major.Tuition_Fee }} triệu/năm</p>
-    </div>
-
-{% endfor %}
-
+                
+        {% endfor %}
 
     
     {% comment %}
