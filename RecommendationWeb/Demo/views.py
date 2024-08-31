@@ -68,7 +68,7 @@ def filter(request):
     unis = University.objects.all()
     majors = Major.objects.all()
     uni_majors = UniMajor.objects.all()
-    comb_majors = CombMajor.objects.all()
+
     #Filtering by region
     selected_regions = request.GET.getlist('region')
     if selected_regions:
@@ -82,25 +82,22 @@ def filter(request):
     selected_fees = request.GET.getlist('fee')
     if selected_fees:
         fees = [tuple(map(float, fee.split('-'))) for fee in selected_fees]
-        queries = [Q(Tuition_Fee__gt=fee[0], Tuition_Fee__lte=fee[1]) for fee in fees]
+        queries = [Q(Max_Tuition_Fee__gt=fee[0], Min_Tuition_Fee__lte=fee[1]) for fee in fees]
         query = queries.pop()
         for q in queries:
             query |= q
-        uni_majors = uni_majors.filter(query)
+        unis = unis.filter(query)
     #Filtering by score
     selected_scores = request.GET.getlist('score')
     if selected_scores:
         scores = [tuple(map(float, score.split('-'))) for score in selected_scores]
-        queries = [Q(Score__gt=score[0], Score__lte=score[1]) for score in scores]    
+        queries = [Q(Min_Score__gt=score[0], Max_Score__lte=score[1]) for score in scores]    
         query = queries.pop()
         for q in queries:
             query |= q
-        comb_majors = comb_majors.filter(query)
-        uni_ids = comb_majors.values_list('Uni', flat=True).distinct()
-        uni_majors = uni_majors.filter(UniID__in=uni_ids)
+        unis = unis.filter(query)
         
     uni_majors = uni_majors.filter(UniID__in=unis)
-    comb_majors = comb_majors.filter(Uni__in=unis)
     majors = majors.filter(ID__in=uni_majors.values_list('MajorID', flat=True))
     query_params = request.GET.copy().urlencode()
     
@@ -112,11 +109,13 @@ def filter(request):
          url = 'Demo/uni.html'
          uni_majors = None
     elif 'major' in request.path:
-        url = 'Demo/major.html'
-        
+        url = 'Demo/major.html'  
     else:
         url = 'Demo/home.html'
-    context = {'unis': unis, 'uni_majors': uni_majors, 'majors': majors, 'comb_majors': comb_majors}
+    context = {'unis': unis, 
+               'uni_majors': uni_majors, 
+               'majors': majors, 
+               'query_params': query_params}
     return render(request, url, context)
 
 
