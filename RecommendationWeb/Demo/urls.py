@@ -12,7 +12,9 @@ urlpatterns = [
     path('university/<str:pk>', views.showOneUniversity, name="show-one-university"),
     path('filter/', views.filter, name="filter"),
     path('university/filter/', views.filter, name="filter-university"),
+    path('university/filter/<str:pk>/', views.filterInOneUniversity, name="filter-one-university"),
     path('major/filter/', views.filter, name="filter-major"),
+    path('major/filter/<str:pk>/', views.filterInOneMajor, name="filter-one-major"),
     
 
 ]

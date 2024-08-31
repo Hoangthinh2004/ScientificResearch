@@ -18,6 +18,27 @@
 {%endblock title%}
 {% block main-content %}
 
+<!-- List all majors -->
+{% for major in majors %}
+        <a href="{% url 'show-one-major' major.ID %}">
+            <div class="major-item">
+                <div class="icon-major">
+                    <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
+                </div>
+                <div class="major-information">
+                    <div class="major-header">
+                        <h2>{{major.ID}}-{{major.Name}}</h2>
+                        <p class="university-score"></p>
+                    </div> 
+                    <div class="major-description">
+                        <p>Chương trình đào tạo của trường Đại học FPT được thiết kế dựa trên sự tham vấn của chuyên gia, chú
+                            trọng thực hành, phù hợp với nhu cầu của nhà tuyển dụng tìm kiếm ở nguồn nhân lực thế hệ mới.</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+
 <!--List majoruni của khối ngành-->
 <div class="list-major">
     
@@ -38,9 +59,8 @@
                                 {% endif %}
                                     
                             {% endfor %}
-                                
-                            {{comb_major.Score}}
                         </p>
+                        <p>{{comb_major.Score}}</p>
                         <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
                     </div>
                 {% endif %}
