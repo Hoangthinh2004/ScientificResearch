@@ -12,7 +12,7 @@ class University(models.Model):
     Name = models.CharField(max_length=200)
     Type = models.CharField(max_length=100)
     Description = models.TextField(max_length=5000, null=True, blank=True)
-    Logo = models.ImageField(upload_to='logos/')
+    # Logo = models.ImageField(upload_to='logos/', blank=True, null=True)
     Min_Score = models.DecimalField(max_digits=4, decimal_places=2)
     Max_Score = models.DecimalField(max_digits=4, decimal_places=2)
     Min_Tuition_Fee = models.DecimalField(max_digits=6, decimal_places=0, null=True, blank=True)
@@ -35,7 +35,7 @@ class UniField(models.Model):
         return f"{self.Uni.Name} - {self.Field.Name}"
     
 class Major(models.Model):
-    ID = models.CharField(max_length=7, primary_key=True)
+    ID = models.CharField(max_length=15, primary_key=True)
     FieldID= models.ForeignKey(FieldOfStudy, on_delete=models.CASCADE)
     Name = models.CharField(max_length=200)
 
@@ -65,7 +65,6 @@ class Combination(models.Model):
 class CombMajor(models.Model):
     Uni = models.ForeignKey(University, on_delete=models.CASCADE)
     Major = models.ForeignKey(Major, on_delete=models.CASCADE)
-    M_Name = models.CharField(max_length=200)
     Comb = models.ForeignKey(Combination, on_delete=models.CASCADE)
     Score = models.DecimalField(max_digits=5, decimal_places=2)
 

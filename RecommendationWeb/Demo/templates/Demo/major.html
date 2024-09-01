@@ -2,47 +2,87 @@
 {% load static %}
 {%block title%} 
     <!--Thông tin tổng quan của khối ngành-->
-    <div class="fieldofmajor-title">
-        <div class="field-header">
-            <img src="" alt=""> <!--Icon major-->
-            <h2>{{major.ID}}-{{major.Name}}</h2>
+    
+    {% if major %}
+        <div class="fieldofmajor-title">
+            <div class="field-header">
+                <img src="" alt=""> <!--Icon major-->
+                <h2>{{major.ID}}-{{major.Name}}</h2>
+            </div>
+            <div class="field-description">
+                <p>Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm</p>
+            </div>
         </div>
-        <div class="field-description">
-            <p>Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm</p>
-        </div>
-    </div>
+    {% endif %}
+        
 {%endblock title%}
 {% block main-content %}
+
+<!-- List all majors -->
+
+{% if majors %}
+    {% for major in majors %}
+    <a href="{% url 'show-one-major' major.ID %}">
+        <div class="major-item">
+            <div class="icon-major">
+                <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
+            </div>
+            <div class="major-information">
+                <div class="major-header">
+                    <h2>{{major.ID}}-{{major.Name}}</h2>
+                    <p class="university-score"></p>
+                </div> 
+                <div class="major-description">
+                    <p>Chương trình đào tạo của trường Đại học FPT được thiết kế dựa trên sự tham vấn của chuyên gia, chú
+                        trọng thực hành, phù hợp với nhu cầu của nhà tuyển dụng tìm kiếm ở nguồn nhân lực thế hệ mới.</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+    
+
+    
 
 <!--List majoruni của khối ngành-->
 <div class="list-major">
     
-    {% for uni_major in uni_majors %}
-        
-        {% for comb_major in comb_majors %}
-            
-            {% if comb_major.Major.ID == uni_major.MajorID.ID %}
-                <div class="major-item-field">
-                    <p>{{uni_major.MajorID.Name}}</p>
-                    <p>{{uni_major.UniID.Name}}</p>
-                    <p>{{comb_major.Comb.ID}}</p>
-                    <p>{{comb_major.Score}}</p>
-                    <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
-                </div>
-            {% endif %}
-                
+    {% elif uni_majors %}
+        {% for uni_major in uni_majors %}
+            {% for comb_major in comb_majors %}
+                {% if comb_major.Major.ID == uni_major.MajorID.ID %}
+                    <div class="major-item-field">
+                        <p>{{uni_major.MajorID.Name}}</p>
+                        <p>{{uni_major.UniID.Name}}</p>
+                        <p> 
+                            {% for comb in comb_majors %}
+                                {% if comb.Major.ID == comb_major.Major.ID and comb.Score == comb_major.Score %}
+                                    {{comb.Comb.ID}}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p>{{comb_major.Score}}</p>
+                        <p>~{{uni_major.Tuition_Fee}} triệu/năm</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
-            
-    {% endfor %}
+    {% else %}
+    <h4>Không có kết quả!</h4>
+{% endif %}
 
+    
+    {% comment %}
     {% for major in majors %}
-        <div class="major-item-field">
-            <p>{{major.MajorID.Name}}</p>
-            <p>{{major.UniID.Name}}</p>
-            <p>22</p>
-            <p>~{{major.Tuition_Fee}} triệu/năm</p>
-        </div>
-    {% endfor %}
+    <!-- <div class="major-item-field">
+        <p>{{major.MajorID.Name}}</p>
+        <p>{{major.UniID.Name}}</p>
+        <p>22</p>
+        <p>~{{major.Tuition_Fee}} triệu/năm</p>
+    </div> -->
+{% endfor %}
+    {% endcomment %}
+        
         
     <!-- <div class="major-item-field">
         <p>Công nghệ thông tin</p>
