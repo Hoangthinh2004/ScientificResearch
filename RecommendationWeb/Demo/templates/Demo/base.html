@@ -50,16 +50,10 @@
                             <ul class="options">
                                 
                                 {% for uni_global in unis_globals %}
-                                <li class="option-u" name="uni_id" value="{{uni_global.ID}}" data-university-id="{{ uni_global.ID }}" data-university-name="{{ uni_global.Name }}">
+                                <li class="option-u" name="uni_id" value="{{uni_global.ID}}" data-university-id="{{ uni_global.ID }}" data-university-name="{{ uni_global.Name }}" 
+                                data-university-url="{% url 'show-one-university' uni_global.ID %}">
                                     <a href="{% url 'show-one-university' uni_global.ID %}">{{ uni_global.ID }}-{{ uni_global.Name }}</a>
                                 </li>
-                                    <!-- <li><a href="home1.html">FPT</a></li>
-                                    <li><a href="home1.html">Hutech</a></li>
-                                    <li><a href="home1.html">USSH</a></li>
-                                    <li><a href="home1.html">UIT</a></li>
-                                    <li><a href="home1.html">UTE</a></li>
-                                    <li><a href="home1.html">UTC2</a></li>
-                                    <li><a href="home1.html">UTH</a></li> -->
                                 {% endfor %}
                                     
                             </ul>
@@ -80,7 +74,8 @@
                             <ul class="options-1">
                                 
                                 {% for major_global in majors_globals %}
-                                <li class="option-m" name="major_id" value="{{ major_global.ID }}" data-major-id="{{ major_global.ID }}" data-major-name="{{ major_global.Name }}">
+                                <li class="option-m" name="major_id" value="{{ major_global.ID }}" data-major-id="{{ major_global.ID }}" data-major-name="{{ major_global.Name }}" 
+                                data-major-url="{% url 'show-one-major' major_global.ID %}">
                                     <a href="{% url 'show-one-major' major_global.ID %}">{{ major_global.ID }}-{{ major_global.Name }}</a>
                                 </li>
                                     
@@ -99,6 +94,12 @@
                 </div>
             </div>
  
+            <!--toggle-->
+            <input type="checkbox" id="check">
+                <label for="check">
+                    <i class="uil-bars" id="btn"></i>
+                    <i class="uil-times" id="cancel"></i>
+                </label>
             <!--side-bar-->
             <div class="side-bar">
                 <h2>Nhóm Ngành</h2>
@@ -108,8 +109,8 @@
                     <i class="uil uil-search"></i>
                 </div>
                 <div class="scroll-sb">
-                    <div class="content-sidebar">
-                        {% for field_global in fields_globals %}
+                    {% for field_global in fields_globals %}
+                    <div class="content-sidebar">      
                         <div class="select-sidebar">
                             <i class="uil uil-angle-right"></i>
                             <span>{{ field_global.Name }}</span>
@@ -125,8 +126,8 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- End Side Bar -->                   

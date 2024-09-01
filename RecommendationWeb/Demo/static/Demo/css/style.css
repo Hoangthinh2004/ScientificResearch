@@ -56,7 +56,7 @@ html,body {
 .select-btn i {
     padding-left: 6px;
     font-size: 31px;
-    transition: transform 0.3s linear ;
+    transition: transform 0.2s linear;
 }
 
 .wrapper.active .select-btn i
@@ -177,7 +177,7 @@ html,body {
 .select-btn-1 i {
     padding-left: 6px;
     font-size: 31px;
-    transition: transform 0.3s linear ;
+    transition: transform 0.2s linear ;
 }
 
 .select-btn-1 a {
@@ -315,18 +315,17 @@ html,body {
 #navigation .search-bar {  
     width: 100%;
     padding: 0 21px;
-    cursor: pointer;
     margin-left: -80px;
 }
 
 .search-bar form {
     /* display: flex; */
-    width: 95%;
+    /* width: 95%; */
 }
 
 .search-bar input[type="text"] {
     color: black;
-    width: 100%;
+    width: 95%;
     padding: 5px 0 5px 10px;
     border: 1px solid #ccc;
     border-radius: 25px;
@@ -338,7 +337,7 @@ html,body {
     color: black;
 }
 
-.search-bar button {
+.search-bar #btn-search {
     position: absolute;
     background: none;
     border: none;
@@ -786,7 +785,141 @@ html,body {
     font-weight: bold;
 }
 
+/* checkbox toggle */
+#check, label #btn, label #cancel {
+    display: none;
+}
 
+@media screen and (max-width: 1024px) {
+    /*nav-bar*/
+    #nav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 120px;
+    }
+
+    /* navigation */
+    #navigation {
+        display: flex;
+        flex-direction: column-reverse;
+        height: 80px;
+    }
+
+    #navigation .search-bar {  
+        position: relative;
+        width: 830px;
+        padding: 0 21px;
+        margin-left: 25px;
+    }
+    
+    .search-bar form {
+        /* display: flex; */
+        /* width: 95%; */
+    }
+    
+    .search-bar input[type="text"] {
+        color: black;
+        width: 100%;
+        padding: 5px 0 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        outline: none;
+        /* margin-left: -50px; */
+    }
+    
+    .search-bar input::placeholder {
+        color: black;
+    }
+    
+    .search-bar #btn-search {
+        position: absolute;
+        background: none;
+        border: none;
+        cursor: pointer;
+        right: -30px;
+        padding-top: 6px;
+    }
+    
+    #btn-search i {
+        font-size: 20px;
+        line-height: 8px;
+        color: #000;
+    }
+
+    /* side bar */
+    .side-bar {
+        left: -340px;
+        transition: all 0.5s ease;
+        margin-top: -12px;
+    }
+
+    /* main content */
+    .main-content {
+        width: 98.2%;
+        margin-top: -12px;
+        margin-left: 8px;
+    }
+
+    /* toggle sidebar */
+    label #btn, label #cancel {
+        display: block;
+    }
+
+    #check {
+        display: none;
+    }
+
+    label #btn, label #cancel {
+        position: absolute;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    label #btn {
+        left: 10px;
+        top: 120px;
+        font-size: 34px;
+        color: #fff;
+        padding: 0 6px;
+        transition: all .5s;
+        
+    }
+
+    label #cancel {
+        z-index: 1111;
+        left: -260px;
+        top: 185px;
+        font-size: 24px;
+        color: #E97731;
+        padding: 0 6px;
+        transition: all .5s ease;
+    }
+
+    #check:checked ~ .side-bar {
+        left: 0;
+    }
+
+    #check:checked ~ .main-content {
+        opacity: 0.7;
+        transition: opacity 0.4s ease;
+    }
+
+    #check:checked ~ label #btn {
+        left: -10px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    #check:checked ~ label #cancel {
+        left: 260px;
+    }
+    
+}
+
+@media screen and (max-width: 786px) {
+    
+}
 
 
 

@@ -2,12 +2,13 @@ const wrapper = document.querySelector(".wrapper"),
 selectBtn = wrapper.querySelector(".select-btn"),
 searchInp = wrapper.querySelector("input"),
 options = wrapper.querySelector(".options");
-universityhtml = options.querySelector("li");
-university_set = wrapper.querySelectorAll(".option-u");
+//universityhtml = options.querySelector("li");
+const university_set = wrapper.querySelectorAll(".option-u");
 //Array of university
 let university = Array.from(university_set).map(item => ({
     id: item.dataset.universityId,
-    name: item.dataset.universityName
+    name: item.dataset.universityName,
+    url: item.dataset.universityUrl
 }));
 
 // function addUni() {
@@ -21,16 +22,30 @@ let university = Array.from(university_set).map(item => ({
 //     });
 // }
 
-searchInp.addEventListener("keyup", () =>{
-    let arr = [];
-    let searchedVal = searchInp.value.toLowerCase();
-    //returning all uni from arr which are start with user searched value
-    arr = university.filter(data => {
-        // Check if the input is found anywhere within either the university ID or name
-        return data.name.toLowerCase().includes(searchedVal) || data.id.toLowerCase().includes(searchedVal);
-    }).map(data => `<li><a href="{% url 'show-one-university' %}${data.id}">${data.id}-${data.name}</a></li>`).join("");
-    options.innerHTML = arr ? arr : `<p>Không có kết quả</p>`
+// searchInp.addEventListener("keyup", () =>{
+//     let arr = [];
+//     let searchedVal = searchInp.value.toLowerCase();
+//     //returning all uni from arr which are start with user searched value
+//     arr = university.filter(data => {
+//         // Check if the input is found anywhere within either the university ID or name
+//         return data.name.toLowerCase().includes(searchedVal) || data.id.toLowerCase().includes(searchedVal);
+//     }).map(data => `<li><a href="{% url 'show-one-university'${data.id} %}">${data.id}-${data.name}</a></li>`).join("");
+//     options.innerHTML = arr ? arr : `<p>Không có kết quả</p>`
     
+// });
+
+searchInp.addEventListener("keyup", () => {
+    let searchedVal = searchInp.value.toLowerCase();
+
+    // Filter and display universities
+    let filteredUnis = university.filter(data => {
+        return data.name.toLowerCase().includes(searchedVal) || data.id.toLowerCase().includes(searchedVal);
+    });
+
+    // Update the options list
+    options.innerHTML = filteredUnis.length ? 
+        filteredUnis.map(data => `<li><a href="${data.url}">${data.id}-${data.name}</a></li>`).join("") :
+        `<p>Không có kết quả</p>`;
 });
 
 selectBtn.addEventListener("click", () => {
@@ -53,19 +68,34 @@ const nav = document.querySelector(".nav-1"),
 
 let major = Array.from(major_set).map(item => ({
     id: item.dataset.majorId,
-    name: item.dataset.majorName
+    name: item.dataset.majorName,
+    url: item.dataset.majorUrl
 }));
 
+// searchInp_1.addEventListener("keyup", () => {
+//     let arr1 = [];
+//     let searchedVal1 = searchInp_1.value.toLowerCase();
+
+//     arr1 = major.filter(data => {
+//         // Check if the input is found anywhere within either the major ID or the major name
+//         return data.name.toLowerCase().includes(searchedVal1) || data.id.toLowerCase().includes(searchedVal1);
+//     }).map(data => `<li><a href="{% url 'show-one-major' %}${data.id}">${data.id}-${data.name}</a></li>`).join("");
+
+//     options_1.innerHTML = arr1 ? arr1 : `<p>Không có kết quả</p>`;
+// });
+
 searchInp_1.addEventListener("keyup", () => {
-    let arr1 = [];
-    let searchedVal1 = searchInp_1.value.toLowerCase();
+    let searchedVal = searchInp_1.value.toLowerCase();
 
-    arr1 = major.filter(data => {
-        // Check if the input is found anywhere within either the major ID or the major name
-        return data.name.toLowerCase().includes(searchedVal1) || data.id.toLowerCase().includes(searchedVal1);
-    }).map(data => `<li><a href="{% url 'show-one-major' %}${data.id}">${data.id}-${data.name}</a></li>`).join("");
+    // Filter and display universities
+    let filteredMajs = major.filter(data => {
+        return data.name.toLowerCase().includes(searchedVal) || data.id.toLowerCase().includes(searchedVal);
+    });
 
-    options_1.innerHTML = arr1 ? arr1 : `<p>Không có kết quả</p>`;
+    // Update the options list
+    options_1.innerHTML = filteredMajs.length ? 
+        filteredMajs.map(data => `<li><a href="${data.url}">${data.id}-${data.name}</a></li>`).join("") :
+        `<p>Không có kết quả</p>`;
 });
 
 selectBtn_1.addEventListener("click", () => {
