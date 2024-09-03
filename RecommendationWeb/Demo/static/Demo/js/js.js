@@ -201,3 +201,12 @@ resetButton.addEventListener('click', function() {
     });
     selectedFilters.innerHTML = '';
 });
+
+// toggle checkbox
+document.addEventListener("click", function(event) {
+    const checkbox = document.getElementById('check');
+    const label = document.querySelector('label[for="check"]');
+    if(!checkbox.contains(event.target) && !label.contains(event.target)){
+        checkbox.checked = false;
+    }
+});

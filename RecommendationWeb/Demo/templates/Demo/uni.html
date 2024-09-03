@@ -32,20 +32,20 @@
     {% if unis %}
         {% for uni in unis %}
             <a href="{% url 'show-one-university' uni.ID %}">
-                <div class="university-item">
-                    <div class="logo-university">
+                <div class="uni-item">
+                    <div class="logo-uni">
                         <img src="{% static 'Demo/image/logofpt.jpg' %}" alt="">
                     </div>
-                    <div class="university-information">
-                        <div class="university-header">
+                    <div class="uni-information">
+                        <div class="uni-header">
                             <h3>{{uni.ID}} - {{uni.Name}}</h3>
-                            <p class="university-type">{{uni.Name}}</p>
-                            <p class="university-fee">Học phí {{uni.Max_Tuition_Fee}} ~ {{uni.Min_Tuition_Fee}} tr/năm</p>
+                            <p class="uni-type">{{uni.Type}}</p>
+                            <p class="uni-fee">Học phí {{uni.Max_Tuition_Fee}} ~ {{uni.Min_Tuition_Fee}} tr/năm</p>
                         </div> 
-                        <div class="university-description">
+                        <div class="uni-description">
                             <p>{{uni.Description}}</p>
                         </div>
-                        <div class="university-location">
+                        <div class="uni-location">
                             <p><strong>Cơ sở:</strong></p> 
                             
                             {% for campus_global in campus_globals %}
